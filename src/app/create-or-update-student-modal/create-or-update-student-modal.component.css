@@ -1,0 +1,24 @@
+.form-add p{
+	width: 100%;
+	float: left;
+}
+
+.form-add span{
+	line-height: 2.5em;
+}
+
+.hidden-detail{
+	display: none;
+}
+
+.alert-listing {
+	width: 100%;
+	float: left;
+	padding: 5px;
+    font-size: 13px;
+}
+
+.modal-student{
+	display: block!important;
+	text-align: center;
+}

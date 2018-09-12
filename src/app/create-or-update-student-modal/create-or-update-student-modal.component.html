@@ -1,0 +1,47 @@
+<div class="form-add">	
+	<div #content>
+	  <div class="modal-header modal-student">
+	    <h4 class="modal-title">	
+	    	{{student.id ? 'Edit student' : 'Adding Student'}}
+	    </h4>
+	    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+	    </button>
+	  </div>
+	  <div class="modal-body">
+
+		<form [formGroup]="form" (onSubmit)="studentSubmit(form.value)">
+
+			<div><img [src]="student.avatar" ALT=""></div>
+
+			<div *ngIf="student.id">
+				<span>ID: </span>
+				<input formControlName="id" class="form-control form-resize">
+			</div>
+
+			<div>
+				<span>First Name: </span>
+				<input formControlName="first_name" class="form-control form-resize">
+			</div>
+
+			<div>
+				<span>Last Name: </span>
+				<input formControlName="last_name" class="form-control form-resize">
+			</div>
+			
+		</form>
+
+	  </div>
+
+	  <div class="modal-footer">
+		
+		<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="student.id">Save</button>
+
+		<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="!student.id" [disabled]="!form.valid">Add</button>
+
+	    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+
+	  </div>
+
+	</div>
+
+</div>
