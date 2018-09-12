@@ -3,12 +3,9 @@
 	float: left;
 }
 
-.form-add span{
-	line-height: 2.5em;
-}
-
-.hidden-detail{
-	display: none;
+.label{
+	line-height: 1em;
+	margin: 15px 0 0 0;
 }
 
 .alert-listing {

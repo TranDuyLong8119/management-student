@@ -39,7 +39,7 @@ export class StudentsComponent implements OnInit {
   edit(selectedStudent: Student): void {
     const initialState = { student: selectedStudent};
     this.bsModalRef = this.modalService.show(CreateOrUpdateStudentModalComponent, 
-    Object.assign({}, null, { class: 'modal-sm', initialState }));
+    Object.assign({}, null, { initialState }));
 
     this.bsModalRef.content.studentSubmitted$.subscribe(edittedStudent => {
       console.log(edittedStudent);
@@ -65,7 +65,6 @@ export class StudentsComponent implements OnInit {
 
   openToAdd() {
     this.bsModalRef = this.modalService.show(CreateOrUpdateStudentModalComponent);
-
     this.bsModalRef.content.studentSubmitted$.subscribe(result => {
       var currentId = this.allStudent.length;
       result.id = this.allStudent[currentId - 1].id + 1;

@@ -11,24 +11,29 @@
 
 		<form [formGroup]="form" (onSubmit)="studentSubmit(form.value)">
 
-			<div><img [src]="student.avatar"></div>
+			<div><img [src]=""></div>
+
+			<div><input formControlName="avatar"></div>
 
 			<div *ngIf="student.id">
-				<span>ID: </span>
+				<label class="label">ID: </label>
 				<input formControlName="id" class="form-control form-resize" readonly>
 			</div>
 
 			<div>
-				<span>First Name: </span>
+				<label class="label">First Name:</label>
 				<input formControlName="first_name" class="form-control form-resize">
 			</div>
 
 			<div>
-				<span>Last Name: </span>
+				<label class="label">Last Name: </label>
 				<input formControlName="last_name" class="form-control form-resize">
 			</div>
 			
 		</form>
+
+		<p>Form value: {{ form.value | json }}</p>
+        <p>Form status: {{ form.status | json }}</p>
 
 	  </div>
 
