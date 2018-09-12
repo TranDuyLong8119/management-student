@@ -11,11 +11,11 @@
 
 		<form [formGroup]="form" (onSubmit)="studentSubmit(form.value)">
 
-			<div><img [src]="student.avatar" ALT=""></div>
+			<div><img [src]="student.avatar"></div>
 
 			<div *ngIf="student.id">
 				<span>ID: </span>
-				<input formControlName="id" class="form-control form-resize">
+				<input formControlName="id" class="form-control form-resize" readonly>
 			</div>
 
 			<div>

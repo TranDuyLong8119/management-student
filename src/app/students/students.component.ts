@@ -43,8 +43,11 @@ export class StudentsComponent implements OnInit {
 
     this.bsModalRef.content.studentSubmitted$.subscribe(edittedStudent => {
       console.log(edittedStudent);
-      selectedStudent.first_name = edittedStudent.first_name;
-      selectedStudent.last_name = edittedStudent.last_name;
+      for (var i = 0; i < this.students.length; i ++) {
+        if (this.students[i].id === edittedStudent.id) {
+            this.students[i] = edittedStudent;
+        }
+      }
     })
   };
 
