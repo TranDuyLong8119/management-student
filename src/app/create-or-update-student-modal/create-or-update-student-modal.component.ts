@@ -14,7 +14,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 export class CreateOrUpdateStudentModalComponent implements OnInit {
 
   form = new FormGroup({
-    id: new FormControl({value:'', disabled: true}, Validators.required),
+    avatar: new FormControl(''),
+    id: new FormControl({value:''}, Validators.required),
     first_name: new FormControl('', Validators.required),
     last_name: new FormControl('', Validators.required)
   });
