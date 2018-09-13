@@ -1,19 +1,18 @@
 <div class="form-add">	
 	<div #content>
 	  <div class="modal-header modal-student">
-	    <h4 class="modal-title">	
+	    <h2 class="modal-title">	
 	    	{{student.id ? 'Edit student' : 'Adding Student'}}
-	    </h4>
-	    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
-	    </button>
+	    </h2>
+	    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()"></button>
 	  </div>
 	  <div class="modal-body">
 
-		<form [formGroup]="form" (onSubmit)="studentSubmit(form.value)">
+		<form [formGroup]="form" (ngSubmit)="studentSubmit()">
 
-			<div><img [src]=""></div>
+			<div *ngIf="student.id"><img [src]="student.avatar"></div>
 
-			<div><input formControlName="avatar"></div>
+			<!-- <div *ngIf="student.id"><input formControlName="avatar"></div> -->
 
 			<div *ngIf="student.id">
 				<label class="label">ID: </label>
@@ -22,28 +21,43 @@
 
 			<div>
 				<label class="label">First Name:</label>
-				<input formControlName="first_name" class="form-control form-resize">
+				<input formControlName="first_name" class="form-control form-resize" required minlength="2" placeholder="First_Name">
+				
+				<div *ngIf="form.controls['first_name'].errors && !form.controls['first_name'].pristine">
+          			<div [hidden]="!form.controls['first_name'].errors.required" class="errors">
+          				First Name is required.
+          			</div>
+          			<div [hidden]="!form.controls['first_name'].errors.minlength" class="errors">
+          				First Name must be at least 2 characters long.
+          			</div>
+        		</div>
 			</div>
 
 			<div>
 				<label class="label">Last Name: </label>
-				<input formControlName="last_name" class="form-control form-resize">
+				<input formControlName="last_name" class="form-control form-resize" required minlength="2" placeholder="Last_Name">
+
+				<div *ngIf="form.controls['last_name'].errors && !form.controls['last_name'].pristine">
+          			<div [hidden]="!form.controls['last_name'].errors.required" class="errors">
+          				Last Name is required.
+          			</div>
+          			<div [hidden]="!form.controls['last_name'].errors.minlength" class="errors">
+          				Last Name must be at least 2 characters long.
+          			</div>
+        		</div>
 			</div>
+
+			<div class="modal-footer">
+		
+				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="student.id">Save</button>
+
+				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="!student.id" [disabled]="!form.valid">Add</button>
+
+		    	<button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+
+	  		</div>
 			
 		</form>
-
-		<p>Form value: {{ form.value | json }}</p>
-        <p>Form status: {{ form.status | json }}</p>
-
-	  </div>
-
-	  <div class="modal-footer">
-		
-		<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="student.id">Save</button>
-
-		<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="!student.id" [disabled]="!form.valid">Add</button>
-
-	    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
 
 	  </div>
 

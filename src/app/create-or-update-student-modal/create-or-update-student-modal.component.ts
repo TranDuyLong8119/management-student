@@ -33,7 +33,6 @@ export class CreateOrUpdateStudentModalComponent implements OnInit {
   }
 
   public studentSubmit(s: Student): void {
-    console.log(s);
   	this.studentSubmitted$.next(s);
   	this.bsModalRef.hide();
   }

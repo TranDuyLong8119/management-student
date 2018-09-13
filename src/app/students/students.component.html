@@ -6,7 +6,7 @@
 		<form>
   			<div>
   				<label>Search Student</label>
-    			<input type="search" class="form-control search-content" #searchBox (keyup)="search(searchBox.value)" placeholder="First_Name">
+    			<input type="search" class="form-control search-content" #searchBox (keyup)="search(searchBox.value)" placeholder="First_Name or Last_Name">
   			</div>
 		</form>
 	</div>
@@ -20,14 +20,14 @@
 		<th>Last Name</th>
 		<th></th>
 	</tr>
-	<tr *ngFor="let student of students; let selectedStudent = index" class="selected">
+	<tr *ngFor="let student of students; let selectedStudentIdx = index" class="selected">
 		<td class="student-id">{{student.id}}</td>
 		<td><img class="avatar" src="{{student.avatar}}" alt=""></td>
 		<td>{{student.first_name}}</td>
 		<td>{{student.last_name}}</td>
 		<td>
 			<span>
-				<button class="btn btn-danger btn-delete" (click)="confirmDeletedStudent(selectedStudent)">Delete</button>
+				<button class="btn btn-danger btn-delete" (click)="confirmDeletedStudent(selectedStudentIdx)">Delete</button>
 				<button class="btn btn-info btn-edit" (click)="edit(student)">Edit</button>
 			</span>
 		</td>

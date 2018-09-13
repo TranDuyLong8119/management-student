@@ -19,3 +19,7 @@
 	display: block!important;
 	text-align: center;
 }
+
+.errors{
+	color: #F21212;
+}
