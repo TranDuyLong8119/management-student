@@ -20,10 +20,14 @@ export class StudentsComponent implements OnInit {
 
   constructor(
       private modalService: BsModalService,
-      public studentService: StudentService
-    ) {};
+      private studentService: StudentService
+  ) {};
 
   ngOnInit() {
+    this.getStudents();
+  }
+
+  getStudents(){
     this.studentService.getStudents().subscribe((resp: any) => {
       this.students = resp.data;
       this.allStudent = resp.data;
@@ -31,7 +35,7 @@ export class StudentsComponent implements OnInit {
   }
 
   edit(selectedStudent: Student): void {
-    const initialState = { student: selectedStudent};
+    const initialState = {student: selectedStudent};
     this.bsModalRef = this.modalService.show(CreateOrUpdateStudentModalComponent, 
     Object.assign({}, null, { initialState }));
 
@@ -40,7 +44,7 @@ export class StudentsComponent implements OnInit {
         if (this.students[i].id == edittedStudent.id) {
             this.students[i] = edittedStudent;
         }
-      }
+      }  
     })
   };
 
