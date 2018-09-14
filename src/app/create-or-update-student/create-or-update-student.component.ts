@@ -13,16 +13,16 @@ import { Observable, of } from 'rxjs';
   templateUrl: './create-or-update-student.component.html',
   styleUrls: ['./create-or-update-student.component.css']
 })
+
 export class CreateOrUpdateStudentComponent implements OnInit {
 
   form = new FormGroup({
     avatar: new FormControl(''),
-    id: new FormControl({value:''}, Validators.required),
+    id: new FormControl('', Validators.required),
     first_name: new FormControl('', Validators.required),
     last_name: new FormControl('', Validators.required)
   });
 
-  allStudent = <any>[];
   student = <any>{};
 
   constructor(
@@ -32,32 +32,19 @@ export class CreateOrUpdateStudentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-  	this.getStudents();
   	this.getStudentToDetail();
   	if (this.student) {
-  		debugger;
   		this.form.patchValue(this.student);
   	}
   }
 
-  getStudents() {
-  	this.studentService.getStudents().subscribe((resp: any) => {
-  	  console.log(resp);
-      this.allStudent = resp.data;
-    });
-  }
-
-  searchStudentsById(id: number): Observable<Student> {
-    return of(this.allStudent.find(student => student.id === id));
-  }
-
   getStudentToDetail(): void {
   	const id = +this.route.snapshot.paramMap.get('id');
-  	this.student = this.searchStudentsById(id);
-  	console.log(this.student);
+  	this.studentService.searchStudentsById(id).subscribe(student => this.student = student);
   }
 
   goBack(): void {
     this.location.back();
   }
+
 }

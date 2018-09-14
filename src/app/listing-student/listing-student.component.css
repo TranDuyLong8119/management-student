@@ -1,5 +1,5 @@
 table{
-	width: 70%;
+	width: 100%;
   margin: auto;
 }
 
@@ -55,13 +55,8 @@ td{
   text-decoration: none;
 }
 
-.container-resize{
-  width: 70%;
-}
-
 .box-right-research{
   float: right;
-  margin: 15px 130px 15px 0;
 }
 
 .search-content{
@@ -70,7 +65,7 @@ td{
 }
 
 .studentAddBtn{
-  margin-top: 40px;
+  margin: 30px 0 10px 0;
   float: left;
 }
 
@@ -86,6 +81,7 @@ td{
   height: 50px;
   border-radius: 50%;
 }
+
 .box-right-research > form > div {
   text-align: left;
 }

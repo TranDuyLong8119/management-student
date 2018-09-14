@@ -1,18 +1,16 @@
 <div class="form-add container">
-	<div #content>
-	  <div class="modal-header modal-student">
-	    <h2 class="modal-title">	
-	    	{{student.id ? 'Edit student' : 'Adding Student'}}
-	    </h2>
-	    
-	  </div>
-	  <div class="modal-body">
 
-		<form [formGroup]="form" (ngSubmit)="studentSubmit()">
+   <div class="modal-header modal-student">
+
+        <h2 class="modal-title">{{student.id ? 'Edit student' : 'Adding Student'}}</h2> 
+
+   </div>
+
+   <div class="modal-body">
+
+	    <form [formGroup]="form">
 
 			<div *ngIf="student.id"><img [src]="student.avatar"></div>
-
-			<!-- <div *ngIf="student.id"><input formControlName="avatar"></div> -->
 
 			<div *ngIf="student.id">
 				<label class="label">ID: </label>
@@ -24,13 +22,13 @@
 				<input formControlName="first_name" class="form-control form-resize" required minlength="2" placeholder="First_Name">
 				
 				<div *ngIf="form.controls['first_name'].errors && !form.controls['first_name'].pristine">
-          			<div [hidden]="!form.controls['first_name'].errors.required" class="errors">
-          				First Name is required.
-          			</div>
-          			<div [hidden]="!form.controls['first_name'].errors.minlength" class="errors">
-          				First Name must be at least 2 characters long.
-          			</div>
-        		</div>
+	      			<div [hidden]="!form.controls['first_name'].errors.required" class="errors">
+	      				First Name is required.
+	      			</div>
+	      			<div [hidden]="!form.controls['first_name'].errors.minlength" class="errors">
+	      				First Name must be at least 2 characters long.
+	      			</div>
+	    		</div>
 			</div>
 
 			<div class="form-box">
@@ -38,29 +36,27 @@
 				<input formControlName="last_name" class="form-control form-resize" required minlength="2" placeholder="Last_Name">
 
 				<div *ngIf="form.controls['last_name'].errors && !form.controls['last_name'].pristine">
-          			<div [hidden]="!form.controls['last_name'].errors.required" class="errors">
-          				Last Name is required.
-          			</div>
-          			<div [hidden]="!form.controls['last_name'].errors.minlength" class="errors">
-          				Last Name must be at least 2 characters long.
-          			</div>
-        		</div>
+	      			<div [hidden]="!form.controls['last_name'].errors.required" class="errors">
+	      				Last Name is required.
+	      			</div>
+	      			<div [hidden]="!form.controls['last_name'].errors.minlength" class="errors">
+	      				Last Name must be at least 2 characters long.
+	      			</div>
+	    		</div>
 			</div>
 
 			<div class="modal-footer">
-		
-				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="student.id">Save</button>
+	
+				<button *ngIf="student.id" type="submit" class="btn btn-primary">Save</button>
 
-				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" [disabled]="!form.valid">Add</button>
+				<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add</button>
 
 		    	<button type="button" class="btn btn-default" (click)="goBack()">Back</button>
 
-	  		</div>
-			
+  			</div>
+		
 		</form>
 
-	  </div>
-
-	</div>
+  	</div>
 
 </div>
