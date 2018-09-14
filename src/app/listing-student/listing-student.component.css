@@ -50,9 +50,10 @@ td{
   margin: 5px;
 }
 
-/*th:last-child, td:last-child{
-  background: #ffffff;
-}*/
+.btn-edit a {
+  color: #fff;
+  text-decoration: none;
+}
 
 .container-resize{
   width: 70%;
@@ -70,10 +71,21 @@ td{
 
 .studentAddBtn{
   margin-top: 40px;
+  float: left;
+}
+
+.studentAddBtn a{
+  color: #fff;
+  font-weight: 400;
+  text-decoration: none;
+  float: left;
 }
 
 .avatar{
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+.box-right-research > form > div {
+  text-align: left;
 }

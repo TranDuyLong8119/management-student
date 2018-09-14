@@ -1,7 +1,7 @@
 <div class="container container-resize">
-
-	<button class="btn btn-primary studentAddBtn" (click)="openToAdd()">Add Student</button>
 	
+	<button class="btn btn-primary studentAddBtn"><a routerLink="/add">Add Student</a></button>
+
 	<div class="box-right-research">
 		<form>
   			<div>
@@ -10,6 +10,7 @@
   			</div>
 		</form>
 	</div>
+	
 </div>
 
 <table>
@@ -28,10 +29,9 @@
 		<td>
 			<span>
 				<button class="btn btn-danger btn-delete" (click)="confirmDeletedStudent(selectedStudentIdx)">Delete</button>
-				<button class="btn btn-info btn-edit" (click)="edit(student)">Edit</button>
+				<button class="btn btn-info btn-edit"><a routerLink="/edit/{{student.id}}">Edit</a></button>
 			</span>
 		</td>
 	</tr>
 </table>
-
 

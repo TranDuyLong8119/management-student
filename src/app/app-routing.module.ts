@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AddStudentComponent } from './add-student/add-student.component';
+import { CreateOrUpdateStudentComponent } from './create-or-update-student/create-or-update-student.component';
+import { ListingStudentComponent } from './listing-student/listing-student.component';
 
 const routes: Routes = [
-	{ path: 'addStudent', component: AddStudentComponent },
-	// { path: '', redirectTo: '/addStudent', pathMatch: 'full' }
+	{ path: 'list', component: ListingStudentComponent },
+	{ path: '', redirectTo: '/list', pathMatch: 'full' },
+	{ path: 'add', component: CreateOrUpdateStudentComponent },
+	{ path: 'edit/:id', component: CreateOrUpdateStudentComponent}
 ];
 
 @NgModule({

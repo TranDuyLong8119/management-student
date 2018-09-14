@@ -1,10 +1,10 @@
-<div class="form-add">	
+<div class="form-add container">
 	<div #content>
 	  <div class="modal-header modal-student">
 	    <h2 class="modal-title">	
 	    	{{student.id ? 'Edit student' : 'Adding Student'}}
 	    </h2>
-	    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()"></button>
+	    
 	  </div>
 	  <div class="modal-body">
 
@@ -19,7 +19,7 @@
 				<input formControlName="id" class="form-control form-resize" readonly>
 			</div>
 
-			<div>
+			<div class="form-box">
 				<label class="label">First Name:</label>
 				<input formControlName="first_name" class="form-control form-resize" required minlength="2" placeholder="First_Name">
 				
@@ -33,7 +33,7 @@
         		</div>
 			</div>
 
-			<div>
+			<div class="form-box">
 				<label class="label">Last Name: </label>
 				<input formControlName="last_name" class="form-control form-resize" required minlength="2" placeholder="Last_Name">
 
@@ -51,9 +51,9 @@
 		
 				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="student.id">Save</button>
 
-				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" *ngIf="!student.id" [disabled]="!form.valid">Add</button>
+				<button type="submit" class="btn btn-primary" (click)="studentSubmit(form.value)" [disabled]="!form.valid">Add</button>
 
-		    	<button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+		    	<button type="button" class="btn btn-default" (click)="goBack()">Back</button>
 
 	  		</div>
 			
