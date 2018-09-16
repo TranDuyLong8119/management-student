@@ -16,35 +16,40 @@ import { Observable, of } from 'rxjs';
 
 export class CreateOrUpdateStudentComponent implements OnInit {
 
+  student = <any>{};
+  edittedStudent = {};
+
   form = new FormGroup({
     avatar: new FormControl(''),
-    id: new FormControl('', Validators.required),
+    id: new FormControl(),
     first_name: new FormControl('', Validators.required),
     last_name: new FormControl('', Validators.required)
   });
 
-  student = <any>{};
-
   constructor(
-  	private location: Location,
-  	private route: ActivatedRoute,
-  	private studentService: StudentService
+   	private location: Location,
+   	private route: ActivatedRoute,
+   	private studentService: StudentService
   ) {}
 
   ngOnInit() {
-  	this.getStudentToDetail();
-  	if (this.student) {
-  		this.form.patchValue(this.student);
-  	}
+   	this.getStudentToDetail();
+   	if (this.student) {
+   		this.form.patchValue(this.student);
+   	}
+    this.studentService.cerrentStudent.subscribe(value => this.edittedStudent = value);
   }
 
   getStudentToDetail(): void {
-  	const id = +this.route.snapshot.paramMap.get('id');
-  	this.studentService.searchStudentsById(id).subscribe(student => this.student = student);
+   	const id = +this.route.snapshot.paramMap.get('id');
+   	this.studentService.searchStudentsById(id).subscribe(student => this.student = student);
   }
 
   goBack(): void {
     this.location.back();
   }
 
+  submittedStudent(edittedStudent: Student) {
+     this.studentService.getEdittedStudent(edittedStudent);
+  }
 }

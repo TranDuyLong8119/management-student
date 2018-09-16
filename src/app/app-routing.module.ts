@@ -5,8 +5,8 @@ import { CreateOrUpdateStudentComponent } from './create-or-update-student/creat
 import { ListingStudentComponent } from './listing-student/listing-student.component';
 
 const routes: Routes = [
-	{ path: 'list', component: ListingStudentComponent },
 	{ path: '', redirectTo: '/list', pathMatch: 'full' },
+	{ path: 'list', component: ListingStudentComponent },
 	{ path: 'add', component: CreateOrUpdateStudentComponent },
 	{ path: 'edit/:id', component: CreateOrUpdateStudentComponent}
 ];

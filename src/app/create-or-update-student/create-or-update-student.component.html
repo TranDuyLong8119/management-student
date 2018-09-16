@@ -1,25 +1,28 @@
-<div class="form-add container">
+<div class="container">
 
-   <div class="modal-header modal-student">
+   <div class="header">
 
-        <h2 class="modal-title">{{student.id ? 'Edit student' : 'Adding Student'}}</h2> 
+        <h2>{{student.id ? 'Edit Student' : 'Add Student'}}</h2> 
 
-   </div>
+   </div>	
 
-   <div class="modal-body">
+   <div class="body">
 
-	    <form [formGroup]="form">
-
-			<div *ngIf="student.id"><img [src]="student.avatar"></div>
+	    <form [formGroup]="form" class="form-group" (ngSubmit)="submittedStudent()">
 
 			<div *ngIf="student.id">
-				<label class="label">ID: </label>
-				<input formControlName="id" class="form-control form-resize" readonly>
+				<label class="title-inf">Avatar: </label>
+				<img [src]="student.avatar">
 			</div>
 
-			<div class="form-box">
-				<label class="label">First Name:</label>
-				<input formControlName="first_name" class="form-control form-resize" required minlength="2" placeholder="First_Name">
+			<div *ngIf="student.id">
+				<label class="title-inf">ID: </label>
+				<input formControlName="id" class="form-control" readonly>
+			</div>
+
+			<div>
+				<label class="title-inf">First Name:</label>
+				<input formControlName="first_name" class="form-control" required minlength="2" placeholder="First_Name">
 				
 				<div *ngIf="form.controls['first_name'].errors && !form.controls['first_name'].pristine">
 	      			<div [hidden]="!form.controls['first_name'].errors.required" class="errors">
@@ -31,9 +34,9 @@
 	    		</div>
 			</div>
 
-			<div class="form-box">
-				<label class="label">Last Name: </label>
-				<input formControlName="last_name" class="form-control form-resize" required minlength="2" placeholder="Last_Name">
+			<div>
+				<label class="title-inf">Last Name: </label>
+				<input formControlName="last_name" class="form-control" required minlength="2" placeholder="Last_Name">
 
 				<div *ngIf="form.controls['last_name'].errors && !form.controls['last_name'].pristine">
 	      			<div [hidden]="!form.controls['last_name'].errors.required" class="errors">
@@ -45,11 +48,11 @@
 	    		</div>
 			</div>
 
-			<div class="modal-footer">
+			<div class="footer">
 	
-				<button *ngIf="student.id" type="submit" class="btn btn-primary">Save</button>
+				<button *ngIf="student.id" type="submit" class="btn btn-primary" (click)="submittedStudent(form.value)">Save</button>
 
-				<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Add</button>
+				<button *ngIf="!student.id" type="submit" class="btn btn-primary" [disabled]="!form.valid">Add</button>
 
 		    	<button type="button" class="btn btn-default" (click)="goBack()">Back</button>
 
