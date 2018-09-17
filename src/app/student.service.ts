@@ -12,10 +12,7 @@ import { STUDENTS } from './listing-student';
 
 export class StudentService {
 
-	public tempStudent = <any>{};
-
-	private edittedStudent = new BehaviorSubject(this.tempStudent);
-	cerrentStudent = this.edittedStudent.asObservable();
+	public students = STUDENTS;
 
 	constructor(private http: HttpClient) {}
 
@@ -27,7 +24,16 @@ export class StudentService {
  		return of(STUDENTS.find(student => student.id === id));
 	}
 
-	getEdittedStudent(edittedStudent: Student) {
-		this.edittedStudent.next(edittedStudent);
+	saveStudent(student: Student): void {
+		if (student && student.id ) {
+			for (let i = 0; i < this.students.length; i++) {
+				if ((student.id) === this.students[i].id) {
+					this.students[i] = student;
+				}
+			}
+		} else {
+			student.id = this.students[this.students.length - 1].id + 1;
+			this.students.push(student);
+		}
 	}
 }

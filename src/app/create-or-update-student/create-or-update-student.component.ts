@@ -34,22 +34,24 @@ export class CreateOrUpdateStudentComponent implements OnInit {
 
   ngOnInit() {
    	this.getStudentToDetail();
-   	if (this.student) {
-   		this.form.patchValue(this.student);
-   	}
-    this.studentService.cerrentStudent.subscribe(value => this.edittedStudent = value);
   }
 
   getStudentToDetail(): void {
    	const id = +this.route.snapshot.paramMap.get('id');
-   	this.studentService.searchStudentsById(id).subscribe(student => this.student = student);
+   	if(id) {
+	   	this.studentService.searchStudentsById(id).subscribe(student => {
+			this.student = student;
+			this.form.patchValue(this.student);
+		});
+   	}
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  submittedStudent(edittedStudent: Student) {
-     this.studentService.getEdittedStudent(edittedStudent);
+  submittedStudent(student: Student) {
+    this.studentService.saveStudent(student);
+    this.goBack();
   }
 }

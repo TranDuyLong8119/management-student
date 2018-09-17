@@ -3,6 +3,7 @@ import { Student } from '../students';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ActivatedRoute } from '@angular/router';
 import { StudentService } from '../student.service';
 import { STUDENTS } from '../listing-student';
 
@@ -15,27 +16,28 @@ import { STUDENTS } from '../listing-student';
 export class ListingStudentComponent implements OnInit {
 
   public bsModalRef: BsModalRef;
-  public students = <any>[];
-  public allStudent = <any>[];
+  public students = STUDENTS;
+  public allStudent = STUDENTS;
 
   constructor(
       private modalService: BsModalService,
       private studentService: StudentService,
+      private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.getStudents();
-    this.updatedStudent();
+    // this.getStudents();
+    this.students = this.studentService.students;
   }
 
-  getStudents() {
-    this.studentService.getStudents().subscribe((resp: any) => {
-      this.students = resp.data;
-      this.allStudent = resp.data;
-    });
-  }
+  // getStudents() {
+  //   this.studentService.getStudents().subscribe((resp: any) => {
+  //     this.students = resp.data;
+  //     this.allStudent = resp.data;
+  //   });
+  // }
 
-  confirmDeletedStudent(selectedStudentIdx): void {
+  confirmDeleteStudent(selectedStudentIdx): void {
     if (confirm('Do you want to delete this student?')) {
       this.students.splice(selectedStudentIdx, 1);
     }
@@ -43,17 +45,8 @@ export class ListingStudentComponent implements OnInit {
 
   search(item) {
     this.students = this.allStudent.filter(s => {
-      return s.first_name.toUpperCase().includes(item.toUpperCase()) ? s.first_name.toUpperCase().includes(item.toUpperCase()) : s.last_name.toUpperCase().includes(item.toUpperCase());
-    });
-  }
-
-  updatedStudent() {
-    this.studentService.cerrentStudent.subscribe(value => {
-      for (var i = 0; i < this.students.length; i++) {
-        if (this.students[i].id == value.id) {
-          this.students[i] = value;
-        }
-      }
+      return s.first_name.toUpperCase().includes(item.toUpperCase()) 
+          || s.last_name.toUpperCase().includes(item.toUpperCase());
     });
   }
 }

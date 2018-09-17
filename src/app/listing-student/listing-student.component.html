@@ -26,12 +26,11 @@
 			<td>{{student.last_name}}</td>
 			<td>
 				<span>
-					<button class="btn btn-danger btn-delete" (click)="confirmDeletedStudent(selectedStudentIdx)">Delete</button>
-					<button class="btn btn-info btn-edit"><a routerLink="/edit/{{student.id}}">Edit</a></button>
+					<button class="btn btn-danger btn-delete" (click)="confirmDeleteStudent(selectedStudentIdx)">Delete</button>
+					<button class="btn btn-info btn-edit"><a class="linkEdit" routerLink="/edit/{{student.id}}">Edit</a></button>
 				</span>
 			</td>
 		</tr>
 	</table>
 	
 </div>
-

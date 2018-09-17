@@ -53,6 +53,11 @@ td{
 .btn-edit a {
   color: #fff;
   text-decoration: none;
+  padding: 6px 12px;
+}
+
+.btn-edit {
+  padding: 6px 0;
 }
 
 .box-right-research{
