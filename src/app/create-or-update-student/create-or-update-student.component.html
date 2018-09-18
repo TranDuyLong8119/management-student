@@ -22,7 +22,7 @@
 
 			<div>
 				<label class="title-inf">First Name:</label>
-				<input formControlName="first_name" class="form-control" required minlength="2" placeholder="First_Name">
+				<input type="text" formControlName="first_name" class="form-control" required minlength="2" placeholder="First_Name">
 				
 				<div *ngIf="form.controls['first_name'].errors && !form.controls['first_name'].pristine">
 	      			<div [hidden]="!form.controls['first_name'].errors.required" class="errors">
@@ -36,7 +36,7 @@
 
 			<div>
 				<label class="title-inf">Last Name: </label>
-				<input formControlName="last_name" class="form-control" required minlength="2" placeholder="Last_Name">
+				<input type="text" formControlName="last_name" class="form-control" required minlength="2" placeholder="Last_Name">
 
 				<div *ngIf="form.controls['last_name'].errors && !form.controls['last_name'].pristine">
 	      			<div [hidden]="!form.controls['last_name'].errors.required" class="errors">

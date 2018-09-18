@@ -3,7 +3,6 @@ import { Student } from '../students';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { ActivatedRoute } from '@angular/router';
 import { StudentService } from '../student.service';
 import { STUDENTS } from '../listing-student';
 
@@ -18,24 +17,29 @@ export class ListingStudentComponent implements OnInit {
   public bsModalRef: BsModalRef;
   public students = STUDENTS;
   public allStudent = STUDENTS;
+  public student: Student;
 
   constructor(
       private modalService: BsModalService,
       private studentService: StudentService,
-      private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    // this.getStudents();
-    this.students = this.studentService.students;
+    this.getStudents();
+    
+    this.studentService.student$.subscribe(student => {
+       this.studentService.addStudent(student).subscribe(student => {
+         this.students.push(student);
+       })
+    });
   }
 
-  // getStudents() {
-  //   this.studentService.getStudents().subscribe((resp: any) => {
-  //     this.students = resp.data;
-  //     this.allStudent = resp.data;
-  //   });
-  // }
+  getStudents() {
+    this.studentService.getStudents().subscribe((resp: any) => {
+      this.students = resp.data;
+      this.allStudent = resp.data;
+    });
+  }
 
   confirmDeleteStudent(selectedStudentIdx): void {
     if (confirm('Do you want to delete this student?')) {
@@ -49,4 +53,5 @@ export class ListingStudentComponent implements OnInit {
           || s.last_name.toUpperCase().includes(item.toUpperCase());
     });
   }
+
 }

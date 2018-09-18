@@ -50,8 +50,16 @@ export class CreateOrUpdateStudentComponent implements OnInit {
     this.location.back();
   }
 
+  // submittedStudent(student: Student) {
+  //   this.studentService.saveStudent(student);
+  //   this.goBack();
+  // }
+
   submittedStudent(student: Student) {
-    this.studentService.saveStudent(student);
+    this.studentService.getAddtedStudent(student);
     this.goBack();
   }
+
+
+
 }

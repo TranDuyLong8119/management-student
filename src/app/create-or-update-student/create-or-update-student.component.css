@@ -23,3 +23,7 @@
 .footer button{
 	margin: 0 0 0 10px;
 }
+
+.errors-border{
+	border: 1px solid red;
+}
