@@ -12,8 +12,9 @@ import { STUDENTS } from './listing-student';
 
 export class StudentService {
 
-	public students = <any>[];
-	public studentURL = 'https://reqres.in/api/users?page=2';
+	// public students = <any>[];
+	public getStudentURL = 'https://reqres.in/api/users?page=2';
+	public postStudentURL = 'https://reqres.in/api/users';
 
 	student = new Subject<any>();
 	student$ = this.student.asObservable();
@@ -21,7 +22,7 @@ export class StudentService {
 	constructor(private http: HttpClient) {}
 
 	getStudents(): Observable<Student[]> {
-		return this.http.get<Student[]>(this.studentURL);
+		return this.http.get<Student[]>(this.getStudentURL);
 	}
 
 	searchStudentsById(id: number): Observable<Student> {
@@ -48,7 +49,6 @@ export class StudentService {
 	}
 
 	addStudent(student: Student): Observable<Student> {
-		student.id = 10;
-		return this.http.post<Student>(this.studentURL, student);
+		return this.http.post<Student>(this.postStudentURL, student);
 	}
 }

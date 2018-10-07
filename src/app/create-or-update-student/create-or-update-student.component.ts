@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Student } from '../students';
 import { Subject } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../student.service';
 import { Observable, of } from 'rxjs';
 
@@ -18,6 +18,7 @@ export class CreateOrUpdateStudentComponent implements OnInit {
 
   student = <any>{};
   edittedStudent = {};
+  public students = <any>[];
 
   form = new FormGroup({
     avatar: new FormControl(''),
@@ -29,16 +30,18 @@ export class CreateOrUpdateStudentComponent implements OnInit {
   constructor(
    	private location: Location,
    	private route: ActivatedRoute,
-   	private studentService: StudentService
+   	private studentService: StudentService,
+    private router: Router
   ) {}
 
   ngOnInit() {
    	this.getStudentToDetail();
+    this.getStudents();
   }
 
   getStudentToDetail(): void {
    	const id = +this.route.snapshot.paramMap.get('id');
-   	if(id) {
+   	if (id) {
 	   	this.studentService.searchStudentsById(id).subscribe(student => {
 			this.student = student;
 			this.form.patchValue(this.student);
@@ -46,20 +49,18 @@ export class CreateOrUpdateStudentComponent implements OnInit {
    	}
   }
 
-  goBack(): void {
-    this.location.back();
+  getStudents() {
+    this.studentService.getStudents().subscribe((resp: any) => {
+      this.students = resp.data;
+    });
   }
 
-  // submittedStudent(student: Student) {
-  //   this.studentService.saveStudent(student);
-  //   this.goBack();
-  // }
+  goBack(): void {
+    this.router.navigate(['/list']);
+  }
 
   submittedStudent(student: Student) {
     this.studentService.getAddtedStudent(student);
     this.goBack();
   }
-
-
-
 }

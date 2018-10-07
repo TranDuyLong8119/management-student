@@ -15,8 +15,8 @@ import { STUDENTS } from '../listing-student';
 export class ListingStudentComponent implements OnInit {
 
   public bsModalRef: BsModalRef;
-  public students = STUDENTS;
-  public allStudent = STUDENTS;
+  public students = <any>[];
+  public allStudent = <any>[];
   public student: Student;
 
   constructor(
@@ -26,12 +26,9 @@ export class ListingStudentComponent implements OnInit {
 
   ngOnInit() {
     this.getStudents();
-    
     this.studentService.student$.subscribe(student => {
-       this.studentService.addStudent(student).subscribe(student => {
-         this.students.push(student);
-       })
-    });
+      this.studentService.addStudent(student);
+    })
   }
 
   getStudents() {
@@ -49,7 +46,7 @@ export class ListingStudentComponent implements OnInit {
 
   search(item) {
     this.students = this.allStudent.filter(s => {
-      return s.first_name.toUpperCase().includes(item.toUpperCase()) 
+      return s.first_name.toUpperCase().includes(item.toUpperCase())
           || s.last_name.toUpperCase().includes(item.toUpperCase());
     });
   }
