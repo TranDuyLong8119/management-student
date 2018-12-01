@@ -1,0 +1,22 @@
+<div class="todo-list">
+
+  <form [formGroup]="formOffer">
+    <label>Name
+      <input type="text" placeholder="Name" formControlName="name">
+    </label>
+    <label>Offer
+      <input type="text" placeholder="Offer" (keyup)="offerValue.value" #offerValue>
+    </label>
+    <button (click)="onSubmit(formOffer.value)">Submit</button>
+  </form>
+  <button [disabled]="!offerValue.value" (click)="onAdd(offerValue)">Add</button>
+
+  <ul class="selected-offers">
+    <li class="offer-item" *ngFor="let offer of offers, let offerIdx = index">{{offer}}
+      <label class="delete-btn" (click)="onDelete(offerIdx)">
+        <span class="delete-icon">x</span>
+      </label>
+    </li>
+  </ul>
+  {{ formOffer.value | json }}
+</div>

@@ -1,0 +1,59 @@
+.todo-list {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+}
+
+.selected-offers {
+    width: 40%;
+    min-height: 120px;
+    max-height: 120px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0;
+    overflow: auto;
+}
+
+.delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddd;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0;
+    position: absolute;
+    right: 5px;
+}
+
+.offer-item {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    background: gray;
+    border-radius: 0.5rem;
+    padding: 5px 30px 5px 5px;
+    position: relative;
+    margin: 2px 0;
+    flex-shrink: 0;
+}
+
+.delete-icon {
+    height: 28px;
+}
