@@ -41,4 +41,8 @@ export class TodoListComponent implements OnInit {
     debugger;
     console.log(e);
   }
+
+  public onFinish() {
+    console.log('Finished');
+  }
 }
