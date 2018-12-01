@@ -45,4 +45,6 @@ export class TodoListComponent implements OnInit {
   public onFinish() {
     console.log('Finished');
   }
+
+  public continues() {console.log('Hello boys!')}
 }
