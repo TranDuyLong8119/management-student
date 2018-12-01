@@ -38,6 +38,7 @@ export class TodoListComponent implements OnInit {
   }
 
   public onKey(e) {
+    debugger;
     console.log(e);
   }
 }
