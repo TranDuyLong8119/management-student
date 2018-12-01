@@ -1,54 +1,49 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Student } from './students';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
 import { STUDENTS } from './listing-student';
+import { debug } from 'util';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 
 export class StudentService {
 
-	// public students = <any>[];
-	public getStudentURL = 'https://reqres.in/api/users?page=2';
-	public postStudentURL = 'https://reqres.in/api/users';
+	// public getStudentURL = 'https://reqres.in/api/users?page=2';
+	// public postStudentURL = 'https://reqres.in/api/users';
+	public student = new Subject<any>();
+	// public student$ = this.student.asObservable();
 
-	student = new Subject<any>();
-	student$ = this.student.asObservable();
+	constructor() { }
 
-	constructor(private http: HttpClient) {}
-
-	getStudents(): Observable<Student[]> {
-		return this.http.get<Student[]>(this.getStudentURL);
-	}
-
-	searchStudentsById(id: number): Observable<Student> {
- 		return of(STUDENTS.find(student => student.id === id));
-	}
-
-	// saveStudent(student: Student): void {
-	// 	if (student && student.id ) {
-	// 		for (let i = 0; i < this.students.length; i++) {
-	// 			if ((student.id) === this.students[i].id) {
-	// 				this.students[i] = student;
-	// 			}
-	// 		}
-	// 	} else {
-	// 		student.id = this.students[this.students.length - 1].id + 1;
-	// 		this.students.push(student);
-	// 	}
+	// public getStudents(): Observable<Student[]> {
+	// 	return this.http.get<Student[]>(this.getStudentURL);
 	// }
 
-	getAddtedStudent(student: Student) {
-		if (student) {
-			this.student.next(student);
+	public getStudents(): Student[] {
+		return STUDENTS;
+	}
+
+	public searchStudentsById(id: number): Observable<Student> {
+		return of(STUDENTS.find(student => student.id === id));
+	}
+
+	public saveStudent(student): void {
+		if (student && student.id) {
+			for (let i = 0; i < STUDENTS.length; i++) {
+				if ((student.id) === STUDENTS[i].id) {
+					STUDENTS[i] = student;
+				}
+			}
+		} else if (student && !student.id) {
+			student.id = STUDENTS[STUDENTS.length - 1].id + 1;
+			STUDENTS.push(student);
 		}
 	}
 
-	addStudent(student: Student): Observable<Student> {
-		return this.http.post<Student>(this.postStudentURL, student);
-	}
+	// public addStudent(student: Student): Observable<Student> {
+	// 	return this.http.post<Student>(this.postStudentURL, student);
+	// }
 }

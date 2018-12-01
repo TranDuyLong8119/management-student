@@ -1,10 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Student } from '../students';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { StudentService } from '../student.service';
-import { STUDENTS } from '../listing-student';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-listing-student',
@@ -20,35 +18,33 @@ export class ListingStudentComponent implements OnInit {
   public student: Student;
 
   constructor(
-      private modalService: BsModalService,
-      private studentService: StudentService,
-  ) {}
+    private studentService: StudentService,
+    private spinner: NgxSpinnerService
+  ) { }
 
-  ngOnInit() {
-    this.getStudents();
-    this.studentService.student$.subscribe(student => {
-      this.studentService.addStudent(student);
-    })
+  public ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      this.spinner.hide();
+      this.getStudents();
+    }, 1500);
   }
 
-  getStudents() {
-    this.studentService.getStudents().subscribe((resp: any) => {
-      this.students = resp.data;
-      this.allStudent = resp.data;
-    });
+  public getStudents() {
+    this.students = this.studentService.getStudents();
+    this.allStudent = this.studentService.getStudents();
   }
 
-  confirmDeleteStudent(selectedStudentIdx): void {
+  public confirmDeleteStudent(selectedStudentIdx) {
     if (confirm('Do you want to delete this student?')) {
       this.students.splice(selectedStudentIdx, 1);
     }
   }
 
-  search(item) {
-    this.students = this.allStudent.filter(s => {
-      return s.first_name.toUpperCase().includes(item.toUpperCase())
-          || s.last_name.toUpperCase().includes(item.toUpperCase());
+  public searchStudent(chars) {
+    this.students = this.allStudent.filter(student => {
+      return student.first_name.toUpperCase().includes(chars.toUpperCase())
+        || student.last_name.toUpperCase().includes(chars.toUpperCase());
     });
   }
-
 }

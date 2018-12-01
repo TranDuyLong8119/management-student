@@ -1,21 +1,27 @@
 <div class="container container-resize">
-	
+
 	<button class="btn btn-primary studentAddBtn"><a routerLink="/add">Add Student</a></button>
 
 	<div class="box-right-research">
 		<form>
-  			<div>
-  				<label>Search Student</label>
-    			<input type="search" class="form-control search-content" #searchBox (keyup)="search(searchBox.value)" placeholder="First_Name or Last_Name">
-  			</div>
+			<div>
+				<label>Search Student</label>
+				<input type="search" class="form-control search-content" 
+					   #searchBox (keyup)="searchStudent(searchBox.value)" 
+					   placeholder="First_Name or Last_Name">
+			</div>
 		</form>
 	</div>
 
+	<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-pulse-sync">
+		<p style="font-size: 20px; color: white">Loading...</p>
+	</ngx-spinner>
+
 	<table>
-		<tr>	
+		<tr>
 			<th>ID</th>
 			<th>Avatar</th>
-			<th>Fist Name</th>	
+			<th>Fist Name</th>
 			<th>Last Name</th>
 			<th></th>
 		</tr>
@@ -32,5 +38,5 @@
 			</td>
 		</tr>
 	</table>
-	
+
 </div>
